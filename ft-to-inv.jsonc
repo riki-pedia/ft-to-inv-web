@@ -1,0 +1,9 @@
+{
+  "token": "agnhjaghujrghjsdbhgdshgnfdsjkashgfhjkadghjkasjkghaskjsdhg=",
+  // this probably wont resolve since this is in a github codespace
+  // because its a local domain for my home setup
+  "instance": "https://invidiou.s",
+  "exportDir": "./exports",
+  // this is "borrowed" from ft-to-inv
+  "freetubeDir": ".github/test/"
+}

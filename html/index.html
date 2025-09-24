@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ft-to-inv Web</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1>⚙️ ft-to-inv Web Portal</h1>
+
+  <form id="config-form">
+    <label>Token (SID):
+      <input type="text" name="token" required />
+    </label><br />
+
+    <label>Instance URL:
+      <input type="text" name="instance" required placeholder="https://invidiou.s" />
+    </label><br />
+
+    <label>Export Directory:
+      <input type="text" name="exportDir" placeholder="./exports" />
+    </label><br />
+
+    <label>FreeTube Directory:
+      <input type="text" name="freetubeDir" placeholder="~/.config/FreeTube" />
+    </label><br />
+
+    <label><input type="checkbox" name="history" checked /> Sync History</label><br />
+    <label><input type="checkbox" name="subscriptions" checked /> Sync Subscriptions</label><br />
+    <label><input type="checkbox" name="playlists" checked /> Sync Playlists</label><br />
+
+    <button type="submit">💾 Save Config</button>
+    <button type="button" id="run-once">▶️ Run Once</button>
+  </form>
+
+  <pre id="output"></pre>
+
+  <script>
+    const form = document.getElementById("config-form");
+    const output = document.getElementById("output");
+    const runOnceBtn = document.getElementById("run-once");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const res = await fetch("/save-config", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      output.textContent = await res.text();
+    });
+
+    runOnceBtn.addEventListener("click", async () => {
+      const data = Object.fromEntries(new FormData(form).entries());
+      const res = await fetch("/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      output.textContent = await res.text();
+    });
+  </script>
+</body>
+</html>

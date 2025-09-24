@@ -1,0 +1,17 @@
+services:
+  ft-to-inv-web:
+    build: .
+    container_name: ft-to-inv-web
+    ports:
+      - "3004:3004"       # map container port to host
+    volumes:
+      - ./config:/app/config      # ft-to-inv.jsonc, etc.
+      - ./.github/test:/freetube
+      - ./exports:/exports
+    environment:
+      NODE_ENV: production
+      INSTANCE: "https://invidiou.s"
+      TOKEN: "CHANGE ME!!!!!"
+      EXPORT_DIR: "/exports"
+      FREETUBE_DIR: "/freetube"
+    restart: unless-stopped

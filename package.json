@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "ft-to-inv": "^1.0.7"
+    "ft-to-inv": "^1.1.0"
   }
 }
